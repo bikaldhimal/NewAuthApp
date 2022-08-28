@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auth App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <section class="">
+      <div
+        class="flex flex-col justify-center items-center text-center h-[100vh]"
+      >
+        <form
+          action="/update"
+          method="post"
+          class="justify-center items-center text-center bg-slate-200 rounded-xl shadow-lg"
+        >
+          <div class="flex flex-col gap-5 m-10">
+            <div class="flex gap-5 items-center">
+              <label class="text-slate-800 font-medium" for="name">Name</label>
+              <input
+                class="text-md text-slate-500 p-2 rounded-sm ml-4 border-[0.1px] border-gray-300 shadow-sm"
+                type="text"
+                name="name"
+                placeholder="Enter full name"
+              />
+            </div>
+            <div class="flex gap-5 items-center">
+              <label class="text-slate-800 font-medium" for="age">Age</label>
+              <input
+                class="text-md text-slate-400 p-2 rounded-sm ml-8 border-[0.1px] border-gray-300 shadow-sm"
+                type="text"
+                name="age"
+                placeholder="Enter your age"
+              />
+            </div>
+            <div class="flex gap-5 items-center">
+              <label class="text-slate-800 font-medium" for="phone"
+                >Phone</label
+              >
+              <input
+                class="text-md text-slate-400 p-2 rounded-sm ml-3 border-[0.1px] border-gray-300 shadow-sm"
+                type="text"
+                name="phone"
+                placeholder="Enter your phone"
+              />
+            </div>
+            <div class="flex gap-5 items-center">
+              <label class="text-slate-800 font-medium" for="address"
+                >Address</label
+              >
+              <input
+                class="text-md text-slate-400 p-2 rounded-sm border-[0.1px] border-gray-300 shadow-sm"
+                type="text"
+                name="address"
+                placeholder="Enter your address"
+              />
+            </div>
+            <button
+              type="submit"
+              class="mt-5 -mb-2 bg-slate-600 h-10 rounded-lg text-white font-bold hover:bg-slate-500 active:bg-slate-400 shadow-lg"
+            >
+              Submit
+            </button>
+
+            <a
+              class="mt-2 -mb-3 text-sm text-slate-500 hover:underline"
+              href="/admin/dashboard"
+              >Cancel</a
+            >
+          </div>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>
