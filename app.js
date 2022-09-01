@@ -63,6 +63,11 @@ const dashboardRouter = require("./routes/admin/dashboard");
 app.use("/admin", dashboardRouter);
 // app.use("/admin", productRouter);
 
+//! API Routes
+// auth Routes
+const apiAuthRouter = require("./routes/api/auth");
+app.use("/api", apiAuthRouter);
+
 //Seeder use
 app.use(adminSeeder);
 

@@ -2,6 +2,7 @@ const User = require("./../../model/auth/user");
 const bcrypt = require("bcryptjs");
 const session = require("express-session");
 var jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 exports.getSignup = (req, res) => {
   res.render("auth/signup");
@@ -140,10 +141,48 @@ exports.postChangePassword = (req, res) => {
 };
 
 exports.postResetPassword = (req, res) => {
-  console.log(
-    "Password reset link has been sent to your email, Please go through your email and reset your password"
-  );
-  res.redirect("/reset-password");
+  if (!req.body.email) {
+    console.log("Empty field, please try again!");
+  } else {
+    console.log(
+      "Password reset link has been sent to your email, Please go through your email and reset your password"
+    );
+    res.redirect("/reset-password");
+
+    // async..await is not allowed in global scope, must use a wrapper
+    async function main() {
+      // Generate test SMTP service account from ethereal.email
+      // Only needed if you don't have a real mail account for testing
+      let testAccount = await nodemailer.createTestAccount();
+
+      // create reusable transporter object using the default SMTP transport
+      let transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "ticketgonepal@gmail.com", // generated ethereal user
+          pass: "oxwatqqrhbaljizo", // generated ethereal password
+        },
+      });
+
+      // send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: '"Ticekt Go Nepal 👻" <ticektgonepal@gmail.com>', // sender address
+        to: req.body.email, // list of receivers
+        subject: "Scholarship Granted", // Subject line
+        text: "Dear sir, you can reset your password through below link:", // plain text body
+        html: '<a href="www.facebook.com">Reset-Password</a>', // html body
+      });
+
+      console.log("Message sent: %s", info.messageId);
+      // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+      // Preview only available when sending through an Ethereal account
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+      // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+    }
+
+    main().catch(console.error);
+  }
 };
 
 exports.logout = (req, res, next) => {
